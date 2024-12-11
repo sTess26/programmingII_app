@@ -141,78 +141,75 @@ def linkedin_app(income, educ, age, gender, par, marital):
 ###UI for streamlit app
 
 st.markdown("##### Enter a person's characteristics to see their likelihood of using LinkedIn!")
-st.markdown("***Definitions for each variable are at the bottom of the page***")
+
 st.markdown("---")
 col1, col2, col3 = st.columns(3)
 with col1:
-    Income = st.selectbox("Select an Income Level:", [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    Income = st.selectbox("Select an Income Level:", ["Less than $10,000", "$10,000 - $20,000", "$20,000 - $30,000", "$30,000 - $40,000", "$40,000 - $50,000", "$50,000 - $75,000", "$75,000 - $100,000", "$100,000 - $150,000", "Above $150,000"])
 with col2:
-    Education = st.selectbox("Select an Education Level:", [1, 2, 3, 4, 5, 6])
+    Education = st.selectbox("Select an Education Level:", ["Less than highschool", "Highschool incomplete", "Highschool graduate", "Some college, no degree", "Two-year associate degree", "Four-year college or university degree"])
 with col3:
     Age = st.slider("Select an Age:", 18,97)
 
 col4, col5, col6 = st.columns(3)
 with col4:
-    Gender = st.selectbox("Select a Gender:", [0,1])
+    Gender = st.selectbox("Select a Gender:", ["Female","Not Female"])
 with col5:
-    Parent = st.selectbox("Select a Parental Status:", [0,1])
+    Parent = st.selectbox("Select a Parental Status:", ["Parent","Not a Parent"])
 with col6:
-    Married = st.selectbox("Select a Marital Status:", [0,1])
+    Married = st.selectbox("Select a Marital Status:", ["Married","Not Married"])
+
+
+if Income == "Less than $10,000":
+    Income = 1
+elif Income =="$10,000 - $20,000":
+    Income = 2
+elif Income =="$20,000 - $30,000":
+    Income = 3
+elif Income =="$30,000 - $40,000":
+    Income = 4
+elif Income =="$40,000 - $50,000":
+    Income = 5
+elif Income =="$50,000 - $75,000":
+    Income = 6
+elif Income =="$75,000 - $100,000":
+    Income = 7
+elif Income =="$100,000 - $150,000":
+    Income = 8
+elif Income =="Above $150,000":
+    Income = 9
+
+if Education == "Less than highschool":
+    Education = 1
+elif Education =="Highschool incomplete":
+    Education = 2
+elif Education =="Highschool graduate":
+    Education = 3
+elif Education =="Some college, no degree":
+    Education = 4
+elif Education =="Two-year associate degree":
+    Education = 5
+elif Education =="Four-year college or university degree":
+    Education = 6
+
+if Gender == "Female":
+    Gender = 1
+elif Gender =="Not Female":
+    Gender = 0
+
+if Married == "Married":
+    Married = 1
+elif Married =="Not Married":
+    Married = 0
+
+if Parent == "Parent":
+    Parent = 1
+elif Parent =="Not a Parent":
+    Parent = 0
+
 
 st.markdown("---")
 st.markdown(f"<p style='color:indianred; font-weight:bold;'>This person's predicted class is: {linkedin_class(Income, Education, Age, Gender, Parent, Married)}</p>", unsafe_allow_html=True)
 linkedin_app(Income, Education, Age, Gender, Parent, Married)
 
 st.markdown("---")
-st.markdown("### Variable Key")
-
-col7, col8, col9 = st.columns(3)
-col7.markdown("##### Income")
-col8.markdown("##### Education")
-col9.markdown("##### Age")
-
-col10, col11, col12 = st.columns(3)
-col10.markdown("""
-- 1: Less than 10,000
-- 2: 10,000 - 20,000
-- 3: 20,000 - 30,000
-- 4: 30,000 - 40,000
-- 5: 40,000 - 50,000
-- 6: 50,000 - 75,000
-- 7: 75,000 - 100,000
-- 8: 100,000 - 150,000
-- 9: 150,000 and above
-""")
-col11.markdown("""
-- 1: Less than highschool
-- 2: Highschool incomplete
-- 3: Highschool graduate
-- 4: Some college, no degree
-- 5: Two-year associate degree from college or university
-- 6: Four-year college or university degree
-""")
-col12.markdown("""
-- 18 through 96: Numeric Age
-- 97: 97 years or above
-""")
-
-col13, col14, col15 = st.columns(3)
-col13.markdown("##### Gender")
-col14.markdown("##### Parental Status")
-col15.markdown("##### Marital Status")
-
-col16, col17, col18 = st.columns(3)
-col16.markdown("""
-- 0: Not Female (Male or Other)
-- 1: Female
-""")
-
-col17.markdown("""
-- 0: Not a Parent
-- 1: Parent
-""")
-
-col18.markdown("""
-- 0: Not Married (Living with partner, divorced, separated, widowed, never married)
-- 1: Married
-""")
